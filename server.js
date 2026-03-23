@@ -13,14 +13,16 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // MySQL connection pool
-const db = mysql.createPool(
-  process.env.MYSQL_URL || {
-    host:     process.env.DB_HOST     || 'localhost',
-    user:     process.env.DB_USER     || 'root',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME     || 'login_app',
-  }
-);
+const db = process.env.MYSQL_URL
+  ? mysql.createPool(process.env.MYSQL_URL)
+  : mysql.createPool({
+      host:     process.env.DB_HOST     || 'localhost',
+      user:     process.env.DB_USER     || 'root',
+      password: process.env.DB_PASSWORD || '',
+      database: process.env.DB_NAME     || 'login_app',
+      waitForConnections: true,
+      connectionLimit: 10,
+    });
   waitForConnections: true,
   connectionLimit: 10,
 });
