@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 — Page Not Found · Mike K.</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2300e5b0'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='monospace' font-size='16' font-weight='700' fill='%2307070f'%3EM%3C/text%3E%3C/svg%3E"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--bg:#07070f;--surface:#0f0f1a;--card:#13131f;--border:#1e1e30;--accent:#00e5b0;--accent2:#ff4d6d;--accent3:#7b61ff;--text:#eeeef5;--muted:#5a5a7a;}
+    html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);}
+    body{display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.35;}
+    /* Grid background */
+    body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.3;}
+    .container{text-align:center;padding:40px 24px;position:relative;z-index:1;animation:fadeUp .6s cubic-bezier(.16,1,.3,1) both;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
+    .glitch{font-family:'IBM Plex Mono',monospace;font-size:clamp(5rem,18vw,10rem);font-weight:700;color:var(--accent);line-height:1;letter-spacing:-.04em;position:relative;display:inline-block;}
+    .glitch::before,.glitch::after{content:'404';position:absolute;top:0;left:0;width:100%;height:100%;}
+    .glitch::before{color:var(--accent2);animation:glitch1 3s infinite;clip-path:polygon(0 30%,100% 30%,100% 50%,0 50%);}
+    .glitch::after{color:var(--accent3);animation:glitch2 3s infinite;clip-path:polygon(0 60%,100% 60%,100% 80%,0 80%);}
+    @keyframes glitch1{0%,90%,100%{transform:none;}92%{transform:translateX(-4px);}94%{transform:translateX(4px);}96%{transform:translateX(-2px);}}
+    @keyframes glitch2{0%,88%,100%{transform:none;}90%{transform:translateX(3px);}92%{transform:translateX(-3px);}94%{transform:translateX(2px);}}
+    .title{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,4vw,2rem);font-weight:700;margin-top:16px;margin-bottom:8px;}
+    .sub{font-size:.95rem;color:var(--muted);margin-bottom:36px;font-family:'IBM Plex Mono',monospace;font-size:.82rem;}
+    .countdown{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--muted);margin-bottom:28px;}
+    .countdown span{color:var(--accent);}
+    .links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:11px;font-family:'IBM Plex Mono',monospace;font-size:.82rem;font-weight:500;text-decoration:none;transition:all .2s;letter-spacing:.03em;}
+    .btn-primary{background:var(--accent);color:var(--bg);}
+    .btn-primary:hover{opacity:.88;transform:translateY(-2px);}
+    .btn-ghost{border:1px solid var(--border);color:var(--muted);}
+    .btn-ghost:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,229,176,.05);}
+    .terminal{margin-top:48px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px 24px;max-width:420px;margin-left:auto;margin-right:auto;text-align:left;}
+    .term-bar{display:flex;gap:7px;margin-bottom:14px;}
+    .term-dot{width:10px;height:10px;border-radius:50%;}
+    .term-line{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--muted);margin-bottom:4px;}
+    .term-line .prompt{color:var(--accent);}
+    .term-line .error{color:var(--accent2);}
+    .term-line .cursor{display:inline-block;width:8px;height:13px;background:var(--accent);animation:blink 1s step-end infinite;vertical-align:middle;}
+    @keyframes blink{50%{opacity:0;}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="glitch">404</div>
+    <div class="title">Page Not Found</div>
+    <p class="sub">// the resource you requested does not exist</p>
+    <div class="countdown">redirecting to home in <span id="timer">5</span>s</div>
+    <div class="links">
+      <a class="btn btn-primary" href="home.html">⬡ Go Home</a>
+      <a class="btn btn-ghost" href="projects.html">◈ Projects</a>
+      <a class="btn btn-ghost" href="profile.html">◉ Contact</a>
+    </div>
+    <div class="terminal">
+      <div class="term-bar">
+        <div class="term-dot" style="background:#ff4d6d"></div>
+        <div class="term-dot" style="background:#f4c542"></div>
+        <div class="term-dot" style="background:#00e5b0"></div>
+      </div>
+      <div class="term-line"><span class="prompt">mike@portfolio:~$</span> GET <span style="color:var(--text)" id="path-display">/unknown</span></div>
+      <div class="term-line"><span class="error">Error 404</span> — route not found</div>
+      <div class="term-line"><span class="prompt">mike@portfolio:~$</span> <span class="cursor"></span></div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('path-display').textContent = window.location.pathname || '/unknown';
+    let t = 5;
+    const el = document.getElementById('timer');
+    const iv = setInterval(()=>{ t--; el.textContent=t; if(t<=0){ clearInterval(iv); window.location.href='home.html'; }}, 1000);
+  </script>
+</body>
+</html>

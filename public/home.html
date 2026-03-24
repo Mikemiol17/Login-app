@@ -3,165 +3,117 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard · Mike's Portfolio</title>
+  <title>Mike K. — CS Student & Developer</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2300e5b0'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='monospace' font-size='16' font-weight='700' fill='%2307070f'%3EM%3C/text%3E%3C/svg%3E"/>
+  <meta name="description" content="Mike K. — CS student and developer from Nairobi, Kenya. Building IoT systems, web apps, and security tools. Available for freelance."/>
+  <meta property="og:title" content="Mike K. — CS Student & Developer"/>
+  <meta property="og:description" content="CS student from Nairobi, Kenya. IoT, ethical hacking, web dev, AI/ML. Available for freelance."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://login-app-production-6c7b.up.railway.app/home.html"/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="Mike K. — CS Student & Developer"/>
+  <meta name="twitter:description" content="CS student from Nairobi. IoT, security, web dev. Available for freelance."/>
+  <!-- Analytics: replace G-XXXXXXXXXX with your GA4 ID from analytics.google.com -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #07070f; --surface: #0f0f1a; --card: #13131f; --border: #1e1e30;
-      --accent: #00e5b0; --accent2: #ff4d6d; --accent3: #7b61ff;
-      --text: #eeeef5; --muted: #5a5a7a; --sidebar-w: 260px;
-    }
-    html, body { height: 100%; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); display: flex; overflow: hidden; }
-    body::after {
-      content: ''; position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 999; opacity: .35;
-    }
-
-    /* ── Sidebar ── */
-    .sidebar {
-      width: var(--sidebar-w); min-height: 100vh; background: var(--surface);
-      border-right: 1px solid var(--border); display: flex; flex-direction: column;
-      padding: 32px 0; flex-shrink: 0; position: relative; z-index: 10;
-      animation: slideIn .5s cubic-bezier(.16,1,.3,1) both;
-    }
-    @keyframes slideIn { from { transform: translateX(-20px); opacity:0; } to { transform: none; opacity:1; } }
-    .sidebar-logo {
-      font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.35rem;
-      letter-spacing: -0.5px; color: var(--text); padding: 0 28px 32px;
-      border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px;
-    }
-    .logo-mark {
-      width: 32px; height: 32px; background: var(--accent); border-radius: 8px;
-      display: grid; place-items: center; color: var(--bg); font-size: .85rem;
-      font-weight: 700; font-family: 'IBM Plex Mono', monospace; flex-shrink: 0;
-    }
-    nav { padding: 24px 16px; flex: 1; }
-    .nav-label {
-      font-family: 'IBM Plex Mono', monospace; font-size: .62rem; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--muted); padding: 0 12px;
-      margin-bottom: 8px; margin-top: 20px;
-    }
-    .nav-label:first-child { margin-top: 0; }
-    .nav-item {
-      display: flex; align-items: center; gap: 12px; padding: 11px 14px;
-      border-radius: 10px; color: var(--muted); font-size: .9rem; font-weight: 400;
-      cursor: pointer; transition: all .2s; text-decoration: none; margin-bottom: 2px;
-    }
-    .nav-item:hover { background: var(--card); color: var(--text); }
-    .nav-item.active { background: rgba(0,229,176,.08); color: var(--accent); }
-    .nav-item .icon { font-size: 1rem; width: 20px; text-align: center; }
-    .nav-badge {
-      margin-left: auto; background: var(--accent); color: var(--bg);
-      font-size: .65rem; font-family: 'IBM Plex Mono', monospace;
-      font-weight: 500; padding: 2px 7px; border-radius: 20px;
-    }
-
-    /* ── Main ── */
-    .main { flex: 1; overflow-y: auto; padding: 40px 44px; animation: fadeUp .6s .1s cubic-bezier(.16,1,.3,1) both; }
-    @keyframes fadeUp { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform: none; } }
-    .main::-webkit-scrollbar { width: 4px; }
-    .main::-webkit-scrollbar-track { background: transparent; }
-    .main::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-
-    .topbar { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 40px; }
-    .greeting-sub { font-family: 'IBM Plex Mono', monospace; font-size: .72rem; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
-    .greeting-name { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; letter-spacing: -.5px; line-height: 1.1; }
-    .topbar-date { font-family: 'IBM Plex Mono', monospace; font-size: .75rem; color: var(--muted); text-align: right; margin-top: 6px; }
-
-    .section-title { font-family: 'IBM Plex Mono', monospace; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
-
+    :root { --bg:#07070f; --surface:#0f0f1a; --card:#13131f; --border:#1e1e30; --accent:#00e5b0; --accent2:#ff4d6d; --accent3:#7b61ff; --text:#eeeef5; --muted:#5a5a7a; --sidebar-w:260px; }
+    html,body{height:100%;}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;overflow:hidden;}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.35;}
+    /* Mobile toggle */
+    .menu-toggle{display:none;position:fixed;top:14px;left:14px;z-index:200;width:40px;height:40px;background:var(--surface);border:1px solid var(--border);border-radius:10px;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;}
+    .menu-toggle span{display:block;width:18px;height:2px;background:var(--text);border-radius:2px;transition:all .25s;}
+    .menu-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .menu-toggle.open span:nth-child(2){opacity:0;}
+    .menu-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9;backdrop-filter:blur(2px);}
+    /* Sidebar */
+    .sidebar{width:var(--sidebar-w);min-height:100vh;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:32px 0;flex-shrink:0;z-index:10;animation:slideIn .5s cubic-bezier(.16,1,.3,1) both;}
+    @keyframes slideIn{from{transform:translateX(-20px);opacity:0;}to{transform:none;opacity:1;}}
+    .sidebar-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.35rem;padding:0 28px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+    .logo-mark{width:32px;height:32px;background:var(--accent);border-radius:8px;display:grid;place-items:center;color:var(--bg);font-size:.85rem;font-weight:700;font-family:'IBM Plex Mono',monospace;}
+    nav{padding:24px 16px;flex:1;}
+    .nav-label{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:0 12px;margin-bottom:8px;margin-top:20px;}
+    .nav-label:first-child{margin-top:0;}
+    .nav-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;color:var(--muted);font-size:.9rem;cursor:pointer;transition:all .2s;text-decoration:none;margin-bottom:2px;}
+    .nav-item:hover{background:var(--card);color:var(--text);}
+    .nav-item.active{background:rgba(0,229,176,.08);color:var(--accent);}
+    .nav-item .icon{font-size:1rem;width:20px;text-align:center;}
+    .nav-badge{margin-left:auto;background:var(--accent);color:var(--bg);font-size:.65rem;font-family:'IBM Plex Mono',monospace;font-weight:500;padding:2px 7px;border-radius:20px;}
+    /* Main */
+    .main{flex:1;overflow-y:auto;padding:40px 44px;animation:fadeUp .6s .1s cubic-bezier(.16,1,.3,1) both;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+    .main::-webkit-scrollbar{width:4px;}.main::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+    /* Topbar */
+    .topbar{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:40px;gap:16px;flex-wrap:wrap;}
+    .greeting-sub{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
+    .greeting-name{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;letter-spacing:-.5px;line-height:1.1;}
+    .topbar-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+    .topbar-date{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--muted);}
+    .hire-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:11px;background:var(--accent);color:var(--bg);font-family:'IBM Plex Mono',monospace;font-size:.82rem;font-weight:500;text-decoration:none;transition:all .2s;letter-spacing:.04em;box-shadow:0 0 24px rgba(0,229,176,.2);}
+    .hire-btn:hover{opacity:.88;transform:translateY(-2px);box-shadow:0 0 32px rgba(0,229,176,.3);}
+    .section-title{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
     /* Stats */
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 36px; }
-    .stat-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
-      padding: 22px 20px; position: relative; overflow: hidden;
-      transition: transform .2s, border-color .2s; animation: fadeUp .5s both;
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:36px;}
+    .stat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px 20px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s;animation:fadeUp .5s both;}
+    .stat-card:nth-child(1){animation-delay:.15s}.stat-card:nth-child(2){animation-delay:.2s}.stat-card:nth-child(3){animation-delay:.25s}.stat-card:nth-child(4){animation-delay:.3s}
+    .stat-card:hover{transform:translateY(-3px);border-color:#2e2e48;}
+    .stat-card::before{content:'';position:absolute;top:0;right:0;width:60px;height:60px;border-radius:0 16px 0 60px;opacity:.07;}
+    .stat-card[data-color="teal"]::before{background:var(--accent)}.stat-card[data-color="pink"]::before{background:var(--accent2)}.stat-card[data-color="purple"]::before{background:var(--accent3)}.stat-card[data-color="gold"]::before{background:#f4c542}
+    .stat-icon{font-size:1.3rem;margin-bottom:14px;}
+    .stat-value{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;letter-spacing:-1px;line-height:1;margin-bottom:4px;}
+    .stat-card[data-color="teal"] .stat-value{color:var(--accent)}.stat-card[data-color="pink"] .stat-value{color:var(--accent2)}.stat-card[data-color="purple"] .stat-value{color:var(--accent3)}.stat-card[data-color="gold"] .stat-value{color:#f4c542}
+    .stat-label{font-size:.78rem;color:var(--muted);}
+    /* Lower */
+    .lower-grid{display:grid;grid-template-columns:340px 1fr;gap:24px;}
+    .about-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px 24px;animation:fadeUp .5s .35s both;display:flex;flex-direction:column;gap:20px;}
+    .about-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent3));display:grid;place-items:center;font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--bg);}
+    .about-header{display:flex;align-items:center;gap:16px;}
+    .about-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;}
+    .about-role{font-size:.78rem;color:var(--accent);font-family:'IBM Plex Mono',monospace;margin-top:3px;}
+    .about-bio{font-size:.88rem;color:var(--muted);line-height:1.65;}
+    .about-meta{display:flex;flex-direction:column;gap:8px;}
+    .about-meta-row{display:flex;align-items:center;gap:10px;font-size:.82rem;color:var(--muted);}
+    .about-meta-row span:first-child{width:18px;text-align:center;}
+    .about-links{display:flex;gap:10px;flex-wrap:wrap;}
+    .about-link{display:flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid var(--border);border-radius:8px;font-size:.8rem;font-family:'IBM Plex Mono',monospace;color:var(--muted);text-decoration:none;transition:all .2s;}
+    .about-link:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,229,176,.05);}
+    .recent-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px 24px;animation:fadeUp .5s .4s both;}
+    .recent-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+    .recent-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;}
+    .recent-link{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--accent);text-decoration:none;}
+    .recent-link:hover{text-decoration:underline;}
+    .project-mini{display:flex;flex-direction:column;gap:12px;}
+    .project-mini-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border-radius:12px;border:1px solid var(--border);transition:background .15s,border-color .15s;text-decoration:none;color:inherit;}
+    .project-mini-item:hover{background:var(--surface);border-color:#2e2e48;}
+    .project-mini-icon{font-size:1.4rem;flex-shrink:0;margin-top:2px;}
+    .project-mini-name{font-size:.9rem;font-weight:500;margin-bottom:4px;}
+    .project-mini-desc{font-size:.78rem;color:var(--muted);line-height:1.5;}
+    .project-mini-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+    .mini-tag{font-family:'IBM Plex Mono',monospace;font-size:.62rem;padding:2px 8px;border-radius:4px;background:rgba(255,255,255,.04);color:var(--muted);border:1px solid var(--border);}
+    /* Responsive */
+    @media(max-width:1200px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:900px){.lower-grid{grid-template-columns:1fr;}}
+    @media(max-width:768px){
+      .menu-toggle{display:flex;}
+      .sidebar{position:fixed;transform:translateX(-100%);transition:transform .3s cubic-bezier(.16,1,.3,1);height:100vh;}
+      .sidebar.open{transform:translateX(0);}
+      .overlay.open{display:block;}
+      .main{padding:70px 20px 28px;}
+      .greeting-name{font-size:1.6rem;}
     }
-    .stat-card:nth-child(1) { animation-delay: .15s; } .stat-card:nth-child(2) { animation-delay: .2s; }
-    .stat-card:nth-child(3) { animation-delay: .25s; } .stat-card:nth-child(4) { animation-delay: .3s; }
-    .stat-card:hover { transform: translateY(-3px); border-color: #2e2e48; }
-    .stat-card::before { content: ''; position: absolute; top: 0; right: 0; width: 60px; height: 60px; border-radius: 0 16px 0 60px; opacity: .07; }
-    .stat-card[data-color="teal"]::before   { background: var(--accent); }
-    .stat-card[data-color="pink"]::before   { background: var(--accent2); }
-    .stat-card[data-color="purple"]::before { background: var(--accent3); }
-    .stat-card[data-color="gold"]::before   { background: #f4c542; }
-    .stat-icon { font-size: 1.3rem; margin-bottom: 14px; }
-    .stat-value { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; letter-spacing: -1px; line-height: 1; margin-bottom: 4px; }
-    .stat-card[data-color="teal"]   .stat-value { color: var(--accent); }
-    .stat-card[data-color="pink"]   .stat-value { color: var(--accent2); }
-    .stat-card[data-color="purple"] .stat-value { color: var(--accent3); }
-    .stat-card[data-color="gold"]   .stat-value { color: #f4c542; }
-    .stat-label { font-size: .78rem; color: var(--muted); }
-
-    /* Lower grid */
-    .lower-grid { display: grid; grid-template-columns: 340px 1fr; gap: 24px; }
-
-    /* About card */
-    .about-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
-      padding: 28px 24px; animation: fadeUp .5s .35s both; display: flex; flex-direction: column; gap: 20px;
-    }
-    .about-avatar {
-      width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent3));
-      display: grid; place-items: center; font-family: 'Playfair Display', serif;
-      font-size: 1.5rem; font-weight: 700; color: var(--bg); flex-shrink: 0;
-    }
-    .about-header { display: flex; align-items: center; gap: 16px; }
-    .about-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; }
-    .about-role { font-size: .78rem; color: var(--accent); font-family: 'IBM Plex Mono', monospace; margin-top: 3px; }
-    .about-bio { font-size: .88rem; color: var(--muted); line-height: 1.65; }
-    .about-meta { display: flex; flex-direction: column; gap: 8px; }
-    .about-meta-row { display: flex; align-items: center; gap: 10px; font-size: .82rem; color: var(--muted); }
-    .about-meta-row span:first-child { font-size: 1rem; width: 18px; text-align: center; }
-    .about-links { display: flex; gap: 10px; flex-wrap: wrap; }
-    .about-link {
-      display: flex; align-items: center; gap: 6px; padding: 7px 14px;
-      border: 1px solid var(--border); border-radius: 8px; font-size: .8rem;
-      font-family: 'IBM Plex Mono', monospace; color: var(--muted); text-decoration: none;
-      transition: all .2s;
-    }
-    .about-link:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,229,176,.05); }
-
-    /* Recent projects card */
-    .recent-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
-      padding: 28px 24px; animation: fadeUp .5s .4s both;
-    }
-    .recent-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .recent-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; }
-    .recent-link { font-family: 'IBM Plex Mono', monospace; font-size: .7rem; color: var(--accent); text-decoration: none; }
-    .recent-link:hover { text-decoration: underline; }
-    .project-mini { display: flex; flex-direction: column; gap: 12px; }
-    .project-mini-item {
-      display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px;
-      border-radius: 12px; border: 1px solid var(--border); transition: background .15s, border-color .15s;
-      text-decoration: none; color: inherit;
-    }
-    .project-mini-item:hover { background: var(--surface); border-color: #2e2e48; }
-    .project-mini-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
-    .project-mini-name { font-size: .9rem; font-weight: 500; margin-bottom: 4px; }
-    .project-mini-desc { font-size: .78rem; color: var(--muted); line-height: 1.5; }
-    .project-mini-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
-    .mini-tag {
-      font-family: 'IBM Plex Mono', monospace; font-size: .62rem; padding: 2px 8px;
-      border-radius: 4px; background: rgba(255,255,255,.04); color: var(--muted);
-      border: 1px solid var(--border);
-    }
-
-    @media (max-width: 1200px) { .stats-grid { grid-template-columns: repeat(2,1fr); } }
-    @media (max-width: 900px) { .lower-grid { grid-template-columns: 1fr; } .main { padding: 28px 20px; } }
   </style>
 </head>
 <body>
 
+<button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+<div class="overlay" id="overlay"></div>
+
 <aside class="sidebar">
-  <div class="sidebar-logo">
-    <div class="logo-mark">M</div>
-    Mike.dev
-  </div>
+  <div class="sidebar-logo"><div class="logo-mark">M</div> Mike.dev</div>
   <nav>
     <div class="nav-label">Portfolio</div>
     <a class="nav-item active" href="home.html"><span class="icon">⬡</span> Dashboard</a>
@@ -176,58 +128,38 @@
 <main class="main">
   <div class="topbar">
     <div>
-      <div class="greeting-sub" id="time-greet">Welcome back</div>
+      <div class="greeting-sub" id="time-greet">Welcome</div>
       <div class="greeting-name">Hello, I'm Mike.</div>
     </div>
-    <div class="topbar-date" id="topbar-date"></div>
+    <div class="topbar-right">
+      <div class="topbar-date" id="topbar-date"></div>
+      <a class="hire-btn" href="profile.html">✦ Hire Me</a>
+    </div>
   </div>
 
   <div class="section-title">Overview</div>
   <div class="stats-grid">
-    <div class="stat-card" data-color="teal">
-      <div class="stat-icon">📁</div>
-      <div class="stat-value">4</div>
-      <div class="stat-label">Projects Built</div>
-    </div>
-    <div class="stat-card" data-color="pink">
-      <div class="stat-icon">🛠</div>
-      <div class="stat-value">15+</div>
-      <div class="stat-label">Technologies</div>
-    </div>
-    <div class="stat-card" data-color="purple">
-      <div class="stat-icon">⬡</div>
-      <div class="stat-value">5</div>
-      <div class="stat-label">GitHub Repos</div>
-    </div>
-    <div class="stat-card" data-color="gold">
-      <div class="stat-icon">✦</div>
-      <div class="stat-value">Open</div>
-      <div class="stat-label">For Freelance</div>
-    </div>
+    <div class="stat-card" data-color="teal"><div class="stat-icon">📁</div><div class="stat-value">4</div><div class="stat-label">Projects Built</div></div>
+    <div class="stat-card" data-color="pink"><div class="stat-icon">🛠</div><div class="stat-value">15+</div><div class="stat-label">Technologies</div></div>
+    <div class="stat-card" data-color="purple"><div class="stat-icon">⬡</div><div class="stat-value">5</div><div class="stat-label">GitHub Repos</div></div>
+    <div class="stat-card" data-color="gold"><div class="stat-icon">✦</div><div class="stat-value">Open</div><div class="stat-label">For Freelance</div></div>
   </div>
 
   <div class="lower-grid">
     <div class="about-card">
       <div class="about-header">
         <div class="about-avatar">MK</div>
-        <div>
-          <div class="about-name">Mike K.</div>
-          <div class="about-role">CS Student & Developer</div>
-        </div>
+        <div><div class="about-name">Mike K.</div><div class="about-role">CS Student & Developer</div></div>
       </div>
-      <p class="about-bio">
-        Computer Science student based in Nairobi, Kenya. I build IoT systems, 
-        web applications, and security tools. Passionate about ethical hacking, 
-        AI/ML, and turning ideas into working software.
-      </p>
+      <p class="about-bio">CS student in Nairobi, Kenya. I build IoT systems, web apps, and security tools. Passionate about ethical hacking, AI/ML, and turning ideas into working software.</p>
       <div class="about-meta">
         <div class="about-meta-row"><span>📍</span><span>Nairobi, Kenya</span></div>
         <div class="about-meta-row"><span>🎓</span><span>B.Sc. Computer Science (Current)</span></div>
-        <div class="about-meta-row"><span>🔐</span><span>Bug Bounty Hunter (HackerOne)</span></div>
+        <div class="about-meta-row"><span>🔐</span><span>Bug Bounty Hunter — HackerOne</span></div>
       </div>
       <div class="about-links">
         <a class="about-link" href="https://github.com/" target="_blank">⬡ GitHub</a>
-        <a class="about-link" href="https://hackerone.com/" target="_blank">🔐 HackerOne</a>
+        <a class="about-link" href="mike-resume.pdf" download>↓ Resume</a>
         <a class="about-link" href="profile.html">◉ Full Profile</a>
       </div>
     </div>
@@ -238,47 +170,24 @@
         <a class="recent-link" href="projects.html">View all →</a>
       </div>
       <div class="project-mini">
-        <a class="project-mini-item" href="projects.html">
-          <div class="project-mini-icon">💧</div>
-          <div>
-            <div class="project-mini-name">Smart Water Level Monitor</div>
-            <div class="project-mini-desc">IoT system using ESP32 with real-time Blynk &amp; ThingSpeak cloud monitoring and automatic pump control.</div>
-            <div class="project-mini-tags">
-              <span class="mini-tag">ESP32</span><span class="mini-tag">IoT</span><span class="mini-tag">Blynk</span><span class="mini-tag">C++</span>
-            </div>
-          </div>
-        </a>
-        <a class="project-mini-item" href="projects.html">
-          <div class="project-mini-icon">🔐</div>
-          <div>
-            <div class="project-mini-name">Ethical Hacking Lab (PHANTOM-X)</div>
-            <div class="project-mini-desc">Complete Kali Linux pentesting environment on WSL2 with Metasploit, Burp Suite, nmap, and custom Python tooling.</div>
-            <div class="project-mini-tags">
-              <span class="mini-tag">Kali Linux</span><span class="mini-tag">Python</span><span class="mini-tag">Metasploit</span>
-            </div>
-          </div>
-        </a>
-        <a class="project-mini-item" href="projects.html">
-          <div class="project-mini-icon">📊</div>
-          <div>
-            <div class="project-mini-name">Algorithm Visualizer</div>
-            <div class="project-mini-desc">Interactive CS education tool covering sorting, searching, graph, and DP algorithms with pseudocode and comparison mode.</div>
-            <div class="project-mini-tags">
-              <span class="mini-tag">JavaScript</span><span class="mini-tag">HTML/CSS</span><span class="mini-tag">Education</span>
-            </div>
-          </div>
-        </a>
+        <a class="project-mini-item" href="projects.html"><div class="project-mini-icon">💧</div><div><div class="project-mini-name">Smart Water Level Monitor</div><div class="project-mini-desc">IoT system using ESP32 with real-time Blynk & ThingSpeak monitoring and automatic pump control.</div><div class="project-mini-tags"><span class="mini-tag">ESP32</span><span class="mini-tag">IoT</span><span class="mini-tag">Blynk</span></div></div></a>
+        <a class="project-mini-item" href="projects.html"><div class="project-mini-icon">🔐</div><div><div class="project-mini-name">PHANTOM-X Hacking Lab</div><div class="project-mini-desc">Full Kali Linux pentesting environment on WSL2 with Metasploit, Burp Suite, nmap, and custom Python tooling.</div><div class="project-mini-tags"><span class="mini-tag">Kali Linux</span><span class="mini-tag">Metasploit</span><span class="mini-tag">Python</span></div></div></a>
+        <a class="project-mini-item" href="projects.html"><div class="project-mini-icon">📊</div><div><div class="project-mini-name">Algorithm Visualizer</div><div class="project-mini-desc">Interactive CS education tool covering sorting, searching, graph, and DP algorithms with pseudocode and comparison mode.</div><div class="project-mini-tags"><span class="mini-tag">JavaScript</span><span class="mini-tag">HTML/CSS</span></div></div></a>
       </div>
     </div>
   </div>
 </main>
 
 <script>
-  const h = new Date().getHours();
-  document.getElementById('time-greet').textContent =
-    h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening';
-  document.getElementById('topbar-date').textContent =
-    new Date().toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+  const h=new Date().getHours();
+  document.getElementById('time-greet').textContent=h<12?'Good morning':h<18?'Good afternoon':'Good evening';
+  document.getElementById('topbar-date').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  const toggle=document.getElementById('menu-toggle'),sidebar=document.querySelector('.sidebar'),overlay=document.getElementById('overlay');
+  const open=()=>{sidebar.classList.add('open');overlay.classList.add('open');toggle.classList.add('open');};
+  const close=()=>{sidebar.classList.remove('open');overlay.classList.remove('open');toggle.classList.remove('open');};
+  toggle.addEventListener('click',()=>sidebar.classList.contains('open')?close():open());
+  overlay.addEventListener('click',close);
+  document.querySelectorAll('.nav-item').forEach(i=>i.addEventListener('click',close));
 </script>
 </body>
 </html>
