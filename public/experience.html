@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Experience · Mike's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #07070f; --surface: #0f0f1a; --card: #13131f; --border: #1e1e30;
+      --accent: #00e5b0; --accent2: #ff4d6d; --accent3: #7b61ff;
+      --text: #eeeef5; --muted: #5a5a7a; --sidebar-w: 260px;
+    }
+    html, body { height: 100%; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); display: flex; overflow: hidden; }
+    body::after {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: .35;
+    }
+    .sidebar { width: var(--sidebar-w); min-height: 100vh; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 32px 0; flex-shrink: 0; z-index: 10; animation: slideIn .5s cubic-bezier(.16,1,.3,1) both; }
+    @keyframes slideIn { from { transform: translateX(-20px); opacity:0; } to { transform: none; opacity:1; } }
+    .sidebar-logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.35rem; padding: 0 28px 32px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+    .logo-mark { width: 32px; height: 32px; background: var(--accent); border-radius: 8px; display: grid; place-items: center; color: var(--bg); font-size: .85rem; font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
+    nav { padding: 24px 16px; flex: 1; }
+    .nav-label { font-family: 'IBM Plex Mono', monospace; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); padding: 0 12px; margin-bottom: 8px; margin-top: 20px; }
+    .nav-label:first-child { margin-top: 0; }
+    .nav-item { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; color: var(--muted); font-size: .9rem; cursor: pointer; transition: all .2s; text-decoration: none; margin-bottom: 2px; }
+    .nav-item:hover { background: var(--card); color: var(--text); }
+    .nav-item.active { background: rgba(0,229,176,.08); color: var(--accent); }
+    .nav-item .icon { font-size: 1rem; width: 20px; text-align: center; }
+    .nav-badge { margin-left: auto; background: var(--accent); color: var(--bg); font-size: .65rem; font-family: 'IBM Plex Mono', monospace; font-weight: 500; padding: 2px 7px; border-radius: 20px; }
+    .main { flex: 1; overflow-y: auto; padding: 40px 44px; animation: fadeUp .6s .1s cubic-bezier(.16,1,.3,1) both; }
+    @keyframes fadeUp { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform: none; } }
+    .main::-webkit-scrollbar { width: 4px; }
+    .main::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    .page-header { margin-bottom: 40px; }
+    .page-eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: .72rem; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
+    .page-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; letter-spacing: -.5px; }
+    .page-sub { font-size: .9rem; color: var(--muted); margin-top: 6px; }
+
+    /* Two column layout */
+    .exp-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+    .section-heading {
+      font-family: 'IBM Plex Mono', monospace; font-size: .68rem; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-heading::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* Timeline */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item { display: flex; gap: 16px; padding-bottom: 28px; position: relative; }
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-left { display: flex; flex-direction: column; align-items: center; width: 36px; flex-shrink: 0; }
+    .tl-dot {
+      width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center;
+      font-size: 1rem; flex-shrink: 0; border: 1px solid var(--border);
+    }
+    .tl-dot-teal   { background: rgba(0,229,176,.1);  border-color: rgba(0,229,176,.2); }
+    .tl-dot-purple { background: rgba(123,97,255,.1); border-color: rgba(123,97,255,.2); }
+    .tl-dot-pink   { background: rgba(255,77,109,.1); border-color: rgba(255,77,109,.2); }
+    .tl-dot-gold   { background: rgba(244,197,66,.1); border-color: rgba(244,197,66,.2); }
+    .tl-line { flex: 1; width: 1px; background: var(--border); margin: 6px 0; }
+    .timeline-item:last-child .tl-line { display: none; }
+
+    .tl-content { flex: 1; padding-top: 6px; }
+    .tl-date { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; color: var(--muted); margin-bottom: 4px; }
+    .tl-title { font-weight: 600; font-size: .95rem; margin-bottom: 2px; }
+    .tl-org { font-size: .82rem; color: var(--accent); margin-bottom: 8px; }
+    .tl-desc { font-size: .82rem; color: var(--muted); line-height: 1.6; }
+    .tl-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+    .tl-tag { font-family: 'IBM Plex Mono', monospace; font-size: .62rem; padding: 2px 8px; border-radius: 5px; background: rgba(255,255,255,.04); color: var(--muted); border: 1px solid var(--border); }
+
+    /* Coursework grid */
+    .coursework-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .course-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 14px 16px; transition: border-color .2s, transform .2s;
+    }
+    .course-card:hover { border-color: #2e2e48; transform: translateY(-2px); }
+    .course-icon { font-size: 1.2rem; margin-bottom: 8px; }
+    .course-name { font-size: .83rem; font-weight: 500; margin-bottom: 3px; }
+    .course-detail { font-size: .72rem; color: var(--muted); }
+
+    @media (max-width: 1100px) { .exp-layout { grid-template-columns: 1fr; } }
+    @media (max-width: 860px) { .main { padding: 28px 20px; } .coursework-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo"><div class="logo-mark">M</div> Mike.dev</div>
+  <nav>
+    <div class="nav-label">Portfolio</div>
+    <a class="nav-item" href="home.html"><span class="icon">⬡</span> Dashboard</a>
+    <a class="nav-item" href="projects.html"><span class="icon">◈</span> Projects <span class="nav-badge">4</span></a>
+    <a class="nav-item" href="skills.html"><span class="icon">◇</span> Skills</a>
+    <a class="nav-item active" href="experience.html"><span class="icon">◎</span> Experience</a>
+    <div class="nav-label">About</div>
+    <a class="nav-item" href="profile.html"><span class="icon">◉</span> Profile</a>
+  </nav>
+</aside>
+
+<main class="main">
+  <div class="page-header">
+    <div class="page-eyebrow">◎ Background</div>
+    <div class="page-title">Experience</div>
+    <div class="page-sub">Education, coursework, and what I've been up to.</div>
+  </div>
+
+  <div class="exp-layout">
+    <!-- Left: Timeline -->
+    <div>
+      <div class="section-heading">Education & Activities</div>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="tl-dot tl-dot-teal">🎓</div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-date">Current</div>
+            <div class="tl-title">B.Sc. Computer Science</div>
+            <div class="tl-org">University · Nairobi, Kenya</div>
+            <div class="tl-desc">Studying core CS theory alongside applied topics in networking, AI, IoT, and systems programming.</div>
+            <div class="tl-tags"><span class="tl-tag">Full-time</span><span class="tl-tag">In Progress</span></div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="tl-dot tl-dot-pink">🔐</div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-date">2024 – Present</div>
+            <div class="tl-title">Bug Bounty Hunter</div>
+            <div class="tl-org">HackerOne (John Deere Program)</div>
+            <div class="tl-desc">Learning penetration testing methodology and responsible disclosure. Building a custom Kali Linux lab (PHANTOM-X) for vulnerability research.</div>
+            <div class="tl-tags"><span class="tl-tag">Ethical Hacking</span><span class="tl-tag">Self-taught</span></div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="tl-dot tl-dot-purple">📡</div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-date">2024</div>
+            <div class="tl-title">IoT Systems Project</div>
+            <div class="tl-org">School Coursework</div>
+            <div class="tl-desc">Built a smart water level monitoring system with ESP32, cloud integration (Blynk & ThingSpeak), and automated pump control. Documented on GitHub.</div>
+            <div class="tl-tags"><span class="tl-tag">IoT</span><span class="tl-tag">Hardware</span><span class="tl-tag">Cloud</span></div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="tl-dot tl-dot-gold">📊</div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-date">2024 – Present</div>
+            <div class="tl-title">Data Science Competitions</div>
+            <div class="tl-org">Zindi Africa</div>
+            <div class="tl-desc">Participating in Africa-focused ML competitions to sharpen data science skills and apply AI/ML theory from coursework in real competition settings.</div>
+            <div class="tl-tags"><span class="tl-tag">ML</span><span class="tl-tag">Python</span><span class="tl-tag">Competition</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Right: Coursework -->
+    <div>
+      <div class="section-heading">Relevant Coursework</div>
+      <div class="coursework-grid">
+        <div class="course-card">
+          <div class="course-icon">🤖</div>
+          <div class="course-name">AI & Machine Learning</div>
+          <div class="course-detail">PEAS, agent types, supervised learning, neural nets</div>
+        </div>
+        <div class="course-card">
+          <div class="course-icon">📡</div>
+          <div class="course-name">IoT Systems</div>
+          <div class="course-detail">Architecture, cloud platforms, edge vs cloud, Kenya applications</div>
+        </div>
+        <div class="course-card">
+          <div class="course-icon">🌐</div>
+          <div class="course-name">Computer Networks</div>
+          <div class="course-detail">Cisco labs, IPv4/IPv6, VLANs, subnetting, TCP/IP</div>
+        </div>
+        <div class="course-card">
+          <div class="course-icon">⚙️</div>
+          <div class="course-name">Assembly Language</div>
+          <div class="course-detail">x86-64 NASM, registers, memory, program structure</div>
+        </div>
+        <div class="course-card">
+          <div class="course-icon">🔣</div>
+          <div class="course-name">Formal Languages & Automata</div>
+          <div class="course-detail">DFA, NDFA, regular expressions, state machines</div>
+        </div>
+        <div class="course-card">
+          <div class="course-icon">📐</div>
+          <div class="course-name">Data Structures & Algorithms</div>
+          <div class="course-detail">Sorting, searching, graphs, dynamic programming</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>
